@@ -10,12 +10,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
 import java.io.FileNotFoundException;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 
     public class LoginLogoutPage extends TestBase {
@@ -40,21 +37,6 @@ import java.util.Set;
         @FindBy(xpath="//span[contains(text(),'Sign')]/parent::a")
         public WebElement logoutBtn;
 
-        @FindBy(xpath="//div[@id='nav-shop']/a")
-        public WebElement allShopNav;
-
-        @FindBy(xpath="//span[@data-nav-panelkey='TvApplElecPanel']")
-        public WebElement TvApplElecPanel;
-
-        @FindBy(xpath="//span[contains(text(),'Headphones')]/parent::a")
-        public WebElement headPhonesCatLnk;
-
-        @FindBy(xpath="//div[@id='mainResults']/ul/li[1]/div/div/div/a[contains(@class,'access-detail-page')]")
-        public WebElement firstHeadPhoneLnk;
-
-        @FindBy(xpath="//input[@id='add-to-cart-button']")
-        public WebElement addToCartBtn;
-
         @FindBy(xpath="//a[@id='nav-cart']")
         public WebElement cartButton;
 
@@ -66,13 +48,6 @@ import java.util.Set;
         @FindBy(xpath="//div[contains(@class,'nav-search-field')]/input")
         public WebElement itemSearchField;
 
-        @FindBy(xpath="//div[starts-with(@class,'sg-col-4')]/div[@class='sg-col-inner']/div/h5/a")
-        public WebElement secondMacbookItem;
-
-        @FindBy(xpath="//select[@id='quantity' or @name='quantity']")
-        public List<WebElement> qtyField;
-
-
         WaitHelper waitHelper;
 
         public LoginLogoutPage(WebDriver driver){
@@ -82,12 +57,12 @@ import java.util.Set;
             //waitHelper.WaitForElement(userName, 60);
         }
 
-        public void enterUserName(String userName) throws FileNotFoundException {
+        public void enterUserName() throws FileNotFoundException {
             String str=TestBase.logindetails();
             this.userName.sendKeys(str);
         }
 
-        public void enterPassword(String password) throws FileNotFoundException {
+        public void enterPassword() throws FileNotFoundException {
             String str1=TestBase.loginpassword();
             this.password.sendKeys(str1);
         }
@@ -96,37 +71,7 @@ import java.util.Set;
             loginButton.click();
         }
 
-        public void enterSearchItemandAddToCart(String item){
-            String mainWindow=driver.getWindowHandle();
-            this.itemSearchField.sendKeys(item);
-            this.itemSearchField.submit();
-            secondMacbookItem.click();
-            Set<String> set =driver.getWindowHandles();
-            Iterator<String> itr= set.iterator();
-            while(itr.hasNext()){
-                String childWindow=itr.next();
-                if(!mainWindow.equals(childWindow)){
-                    driver.switchTo().window(childWindow);
-                    System.out.println(driver.switchTo().window(childWindow).getTitle());
-                    if(qtyField.size()>=1){
 
-                        Select sel = new Select(qtyField.get(0));
-                        sel.selectByValue("2");
-                    }
-
-                    JavascriptExecutor js = (JavascriptExecutor)driver;
-                    js.executeScript("arguments[0].scrollIntoView(true);",addToCartBtn);
-                    js.executeScript("arguments[0].click();", addToCartBtn);
-                    if(driver.findElements(By.xpath("//div[@class='a-popover-inner']//button[contains(text(),'Skip')]")).size()>=1){
-
-                        driver.findElements(By.xpath("//div[@class='a-popover-inner']//button[contains(text(),'Skip')]")).get(0).click();
-                    }
-                    //addToCartBtn.click();
-                    //driver.close();
-                }
-            }
-            driver.switchTo().window(mainWindow);
-        }
 
         public void clickSignInButton(){
             Actions builder = new Actions(driver);
@@ -143,27 +88,9 @@ import java.util.Set;
             }
         }
 
-        public void clickHeadphonesLnk(){
-            Actions builder = new Actions(driver);
-            builder.moveToElement(allShopNav).build().perform();
-            builder.moveToElement(TvApplElecPanel).build().perform();
-            JavascriptExecutor js = (JavascriptExecutor)driver;
-            js.executeScript("arguments[0].click();", headPhonesCatLnk);
-
-        }
-
-        public void AddHeadphoneToCart(){
-
-            firstHeadPhoneLnk.click();
-            JavascriptExecutor js = (JavascriptExecutor)driver;
-            js.executeScript("arguments[0].click();", addToCartBtn);
-        }
-
         public void clickContinueButton(){
             Continue.click();
         }
-
-
 
         public void clickLogoutButton(){
             Actions builder = new Actions(driver);

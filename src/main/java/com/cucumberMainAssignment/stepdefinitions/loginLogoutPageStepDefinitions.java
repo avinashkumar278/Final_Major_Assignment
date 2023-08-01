@@ -8,10 +8,6 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-
-
 
     public class loginLogoutPageStepDefinitions extends TestBase {
 
@@ -40,9 +36,9 @@ import org.openqa.selenium.JavascriptExecutor;
             logger.info("I should see Sign In Page");
         }
 
-        @When("^I enter username as \"([^\"]*)\"$")
-        public void i_enter_username_as(String arg1) throws Throwable {
-            loginPage.enterUserName(arg1);
+        @When("^I enter username as$")
+        public void i_enter_username_as() throws Throwable {
+            loginPage.enterUserName();
             logger.info("I enter username");
         }
 
@@ -53,9 +49,9 @@ import org.openqa.selenium.JavascriptExecutor;
             logger.info("I Click on Continue button$");
         }
 
-        @When("^I enter password as \"([^\"]*)\"$")
-        public void i_enter_password_as(String arg1) throws Throwable {
-            loginPage.enterPassword(arg1);
+        @When("^I enter password as$")
+        public void i_enter_password_as() throws Throwable {
+            loginPage.enterPassword();
             logger.info("I enter password");
         }
 
@@ -78,48 +74,10 @@ import org.openqa.selenium.JavascriptExecutor;
             logger.info("I Click on Sign out");
         }
 
-        @Then("^I got log out from the application and land on sign in page$")
-        public void i_got_log_out_from_the_application_and_land_on_sign_in_page() throws Throwable {
-            loginPage.userName.isDisplayed();
-            logger.info("I got log out from the application and land on sign in page$");
-        }
-
-        @Then("^I got log out from the application and land on sign in page$$")
-        public void i_choose_Electronincs_Headphones_and_headphones_list_out() throws Throwable {
-            loginPage.clickHeadphonesLnk();
-            logger.info("I got log out from the application and land on sign in page$");
-        }
-
-        @Then("^I add first availabe headphone to cart$")
-        public void i_add_first_availabe_headphone_to_cart() throws Throwable {
-            loginPage.AddHeadphoneToCart();
-            logger.info("I add first availabe headphone to cart");
-        }
-
-        @Then("^I search \"([^\"]*)\" and add second available item to cart$")
-        public void i_search_and_add_nd_available_item_to_cart(String arg1) throws Throwable {
-            loginPage.enterSearchItemandAddToCart(arg1);
-            logger.info("I search and add second available item to cart");
-        }
-
         @Then("^I clear cart items if any$")
         public void i_clear_cart_items_if_any() throws Throwable {
             loginPage.clearCartItemifExist();
             logger.info("I clear cart items if any");
-        }
-
-        @Then("^I Select cart from home and remove the earlier added headphones$")
-        public void i_Select_cart_from_home_and_remove_the_earlier_added_headphones() throws Throwable {
-            loginPage.cartButton.click();
-            loginPage.itemList.get(1).click();
-            logger.info("I Select cart from home and remove the earlier added headphones");
-        }
-
-        @Then("^I Reduce the Quantity of the macbook pro product to one and proceed to checkout$")
-        public void i_Reduce_the_Quantity_of_the_macbook_pro_product_to_one_and_proceed_to_checkout() throws Throwable {
-            JavascriptExecutor js = (JavascriptExecutor)driver;
-            js.executeScript("arguments[0].innerText='1'",driver.findElement(By.className("a-dropdown-prompt")));
-            logger.info("I Reduce the Quantity of the macbook pro product to one and proceed to checkout");
         }
 
         @Then("^I search different \"([^\"]*)\" from the search bar$")
