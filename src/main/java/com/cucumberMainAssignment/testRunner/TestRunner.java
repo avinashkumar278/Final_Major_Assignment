@@ -14,6 +14,8 @@ import cucumber.api.testng.TestNGCucumberRunner;
         "json:target/cucumber-reports/CucumberTestReport.json",
         "rerun:target/cucumber-reports/rerun.txt"},
         monochrome = true, dryRun = false)
+
+//"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
 public class TestRunner {
 
     private TestNGCucumberRunner testNGCucumberRunner;

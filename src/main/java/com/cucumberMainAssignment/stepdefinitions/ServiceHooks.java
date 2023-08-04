@@ -30,7 +30,7 @@ public class ServiceHooks {
 			try {
 				log.info(scenario.getName() + " is Failed");
 				final byte[] screenshot = ((TakesScreenshot) TestBase.driver).getScreenshotAs(OutputType.BYTES);
-				scenario.embed(screenshot, "image/png"); // ... and embed it in
+				scenario.embed(screenshot, "image/png");
 			} catch (WebDriverException e) {
 				e.printStackTrace();
 			}

@@ -34,6 +34,7 @@ public class TestBase {
             if (browser.equalsIgnoreCase(Browsers.CHROME.name())) {
                 System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/test/resources/drivers/chromedriver");
                 driver = new ChromeDriver();
+                driver.manage().window().maximize();
             } else if (browser.equalsIgnoreCase(Browsers.FIREFOX.name())) {
                 System.setProperty("webdriver.firefox.marionette", System.getProperty("user.dir") + "/src/test/resources/drivers/geckodriver");
                 driver = new FirefoxDriver();
